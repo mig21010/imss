@@ -1,0 +1,15 @@
+{
+  "name": "imss",
+  "version": "1.0.0",
+  "description": "School Project",
+  "main": "index.php",
+  "repository": "https://github.com/richardosauriorex/imss.git",
+  "author": "ANONIMO",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "sweetalert2": "^7.0.6"
+  }
+}
