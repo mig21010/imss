@@ -13,7 +13,8 @@ class Main extends CI_Controller {
 	// List all your items
 	public function index( $offset = 0 )
 	{
-
+		/*esta funcion personalizada permite cargar una vista con las librerias css, js, menu y footer*/
+		$this->utilidades->layouts('main/index');
 	}
 
 	// Add a new item
