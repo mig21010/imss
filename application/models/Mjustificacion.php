@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pase extends CI_Model {
-private $table = 'pase';
+class Mjustificacion extends CI_Model {
+private $table = 'justificacion';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')
 	{
@@ -69,5 +69,5 @@ private $table = 'pase';
 
 }
 
-/* End of file Pase.php */
-/* Location: ./application/models/Pase.php */
+/* End of file Justificacion.php */
+/* Location: ./application/models/Justificacion.php */

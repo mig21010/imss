@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sustitucion extends CI_Model {
+class Msustitucion extends CI_Model {
 private $table = 'sustitucion';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')

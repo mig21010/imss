@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Administrador extends CI_Model {
-private $table = 'administrador';
+class Mcategoria extends CI_Model {
+private $table = 'categoria';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')
 	{
@@ -69,5 +69,5 @@ private $table = 'administrador';
 
 }
 
-/* End of file Administrador.php */
-/* Location: ./application/models/Administrador.php */
+/* End of file Categoria.php */
+/* Location: ./application/models/Categoria.php */

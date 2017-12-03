@@ -19,6 +19,30 @@ class Utilidades {
 		$this->ext->load->view('layouts/_js_files.php');
 	}
 
+	public function horario()
+	{
+		$time = [];
+		$seg = 0;
+		for ($i = 0; $i < 24; $i++) {
+			for ($j = 0; $j <= .50 ; $j+=.10) {
+				if ($j == 0) {
+					if ($i < 10 ) {
+						array_push($time, '0'.floor($i).':00');
+					}else{
+						array_push($time, floor($i).':00');
+					}
+				}else{
+					if ($i < 10 ) {
+						array_push($time, '0'.floor($i).':'.($j * 100));
+					}else{
+						array_push($time, floor($i).':'.($j * 100));
+					}
+				}
+			}
+		}
+		return $time;
+	}
+
 }
 
 /* End of file Utilidades.php */

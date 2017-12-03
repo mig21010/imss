@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tipolicencia extends CI_Model {
-private $table = 'tipo_licencia';
+class Mlicencia extends CI_Model {
+private $table = 'licencia';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')
 	{
@@ -69,5 +69,5 @@ private $table = 'tipo_licencia';
 
 }
 
-/* End of file Tipolicencia.php */
-/* Location: ./application/models/Tipolicencia.php */
+/* End of file Licencia.php */
+/* Location: ./application/models/Licencia.php */

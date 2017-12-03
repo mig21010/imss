@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Departamento extends CI_Model {
-private $table = 'departamento';
+class Mcomision extends CI_Model {
+private $table = 'comision';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')
 	{
@@ -69,5 +69,5 @@ private $table = 'departamento';
 
 }
 
-/* End of file Departamento.php */
-/* Location: ./application/models/Departamento.php */
+/* End of file Comision.php */
+/* Location: ./application/models/Comision.php */

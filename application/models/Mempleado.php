@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuario extends CI_Model {
-private $table = 'usuario';
+class Mempleado extends CI_Model {
+private $table = 'empleado';
 /*recibe un arreglo asociativo con los campos y valores a insertar*/	
 	public function insert($value = '')
 	{
@@ -69,5 +69,5 @@ private $table = 'usuario';
 
 }
 
-/* End of file Usuario.php */
-/* Location: ./application/models/Usuario.php */
+/* End of file Empleado.php */
+/* Location: ./application/models/Empleado.php */

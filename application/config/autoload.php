@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('madministrador', 'mcategoria','mdepartamento','mcomision', 'mlicencia', 'mtipolicencia', 'mpase', 'msustitucion', 'mempleado', 'mjustificacion', 'musuario');

@@ -20,7 +20,8 @@ class Main extends CI_Controller {
 	// Add a new item
 	public function close_session()
 	{
-
+		session_destroy();
+		redirect(site_url(),'refresh');
 	}
 }
 

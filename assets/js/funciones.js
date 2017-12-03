@@ -13,6 +13,11 @@ function postAjax(url = '', data = '', callback) {
 		if (callback) callback(data);			
 	})
 	.fail(function() {
-		/*sweet alerts*/	
+		/*sweet alerts*/
+		swal(
+		  'Oops...',
+		  'Something went wrong!',
+		  'error'
+		)	
 	});	
 }
