@@ -6,17 +6,20 @@ class Empleado extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//Load Dependencies
 
 	}
 
-	// List all your items
 	public function index( $offset = 0 )
 	{
-
+		$data = [
+			'usuario' => $this->mempleado->get(['usu_id'=>$this->session->userdata('emp')], 1),
+			'categorias' => $this->mcategoria->get(),
+			'departamentos' => $this->mdepartamento->get(),
+			'time' => $this->utilidades->horario()
+		];
+		$this->utilidades->layouts('empleado/index', $data);	
 	}
 
-	// Add a new item
 	public function registro()
 	{
 		$data = [
@@ -43,6 +46,7 @@ class Empleado extends CI_Controller {
 		$this->form_validation->set_rules('emp_sali', 'Horario de salida', 'trim|required');
 		$this->form_validation->set_rules('emp_turn', 'Turno', 'trim|required');
 		$this->form_validation->set_rules('emp_dia_desc', 'Dias de descanso', 'trim|required');
+		$this->form_validation->set_rules('emp_ads', 'Adscripción', 'trim|required');
 		if ($this->form_validation->run() == TRUE) {
 			$values = [
 				'usu_corr' => $this->input->post('usu_corr', TRUE),
@@ -62,7 +66,8 @@ class Empleado extends CI_Controller {
 				'emp_turn' => $this->input->post('emp_turn', TRUE),
 				'emp_dia_desc' => $this->input->post('emp_dia_desc', TRUE),
 				'emp_est' => '1',
-				'usu_id' => $id
+				'usu_id' => $id,
+				'emp_adsc' => $this->input->post('emp_adsc', TRUE)
 				];
 				if ($this->mempleado->insert($values)) {
 					$values = [
@@ -118,7 +123,6 @@ class Empleado extends CI_Controller {
 		
 	}
 
-	// Add a new item
 	public function editar($matricula = '')
 	{
 		$data = [
@@ -191,11 +195,22 @@ class Empleado extends CI_Controller {
 		echo json_encode($data);
 	}
 
-
-	//Update one item
-	public function update( $id = NULL )
+	public function info()
 	{
-
+		$data = [];
+		$data['csrf'] = $this->security->get_csrf_hash();
+		$this->form_validation->set_rules('sus_emp', 'Empleado sustituto', 'trim|required|max_length[20]');
+		if ($this->form_validation->run() == TRUE) {
+			$exist = $this->mempleado->get(['emp_matr_id' => $this->input->post('sus_emp', TRUE)],1);
+			if (!empty($exist)) {
+				$data['info'] = $exist;
+				$res = $this->mdepartamento->get(['dep_id' => $data['info']->dep_id],1);
+				$data['dep'] = $res->dep_desc;
+				$res = $this->mcategoria->get(['cat_id' => $data['info']->cat_id],1);
+				$data['cat'] = $res->cat_desc;	
+			}
+		}
+		echo json_encode($data);
 	}
 
 	//Delete one item

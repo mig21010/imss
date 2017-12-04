@@ -1,6 +1,6 @@
 function postAjax(url = '', data = '', callback) {
 	var csrf = $("input[name|='imss_token']").val();
-	data.security = csrf;
+	data.imss_token = csrf;
 	$.ajax({
 		url: url,
 		type: 'POST',
