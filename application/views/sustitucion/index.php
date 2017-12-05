@@ -25,6 +25,9 @@
 							<th>Fecha de susutitución</th>
 							<th>Horario Sustitución</th>
 							<th>Turno de sustitución</th>
+							<?php if ($this->session->has_userdata('admin')): ?>
+							<th>Cambiar Estatus</th>
+							<?php endif ?>
 							<th>Estatus</th>
 							<th>Eliminar</th>
 						</thead>
@@ -36,14 +39,20 @@
 								<th><?= $value->sus_fech ?></th>
 								<th><?= $value->sus_hora ?></th>
 								<th><?= $value->sus_turn ?></th>
-								<th><?= $value->sus_est ?></th>
-								<?php $status = ($value->sus_est == 1) ? 'disabled' : ''; ?>
-								<th><button class="btn btn-danger text-white" <?= $status ?> onclick="eliminar('<?= $value->sus_id?>')">Eliminar</button></th>
+								<?php if ($this->session->has_userdata('admin')): ?>
+								<th><button class="btn btn-warning text-white" onclick="cambiarEstatus('<?= $value->sus_id ?>')">Cambiar Estatus</button></th>
+								<?php endif ?>
+								<?php $status = ($value->sus_est == 1) ? 'Aprobada' : 'No aprobada'; ?>
+								<th><?= $status ?></th>
+								<?php $disabled = ($value->sus_est == 1) ? 'disabled' : ''; ?>
+								<th><button class="btn btn-danger text-white" <?= $disabled ?> onclick="eliminar('<?= $value->sus_id?>')">Eliminar</button></th>
 								<th><a href="<?= site_url().'/sustitucion/pdf/'.$value->sus_id ?>" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> PDF</a></th>
 							</tr>
 							<?php endforeach ?>
 							<?php endif ?>
 						</tbody>
+						<?= form_open(); ?>
+						<?= form_close(); ?>
 					</table>
 				</div>
 			</div>
@@ -53,5 +62,29 @@
 <script>
 function crearFormato(){
 window.location = '<?= site_url()."/sustitucion/crear" ?>';
+}
+
+function eliminar(id = ''){
+	data = {sus_id:id};
+	postAjax('<?= site_url()."/sustitucion/proEliminar" ?>', data, function(response){
+		if (response.success != undefined) {
+					swal('Se proceso la información',response.success,'info');
+					setInterval(function(){ window.location = '<?= site_url()."/sustitucion/index" ?>';}, 2000);
+				} else {
+					swal('Hubo un problema.',response.error,'error');
+				}
+	});
+}
+
+function cambiarEstatus(id = ''){
+	data = {sus_id:id};
+	postAjax('<?= site_url()."/sustitucion/proEstatus" ?>', data, function(response){
+		if (response.success != undefined) {
+					swal('Se proceso la información',response.success,'info');
+					setInterval(function(){ window.location = '<?= site_url()."/sustitucion/index" ?>';}, 2000);
+				} else {
+					swal('Hubo un problema.',response.error,'error');
+				}
+	});
 }
 </script>

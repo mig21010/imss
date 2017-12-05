@@ -9,29 +9,52 @@ class Tipolicencia extends CI_Controller {
 		//Load Dependencies
 
 	}
-
-	// List all your items
-	public function index( $offset = 0 )
+	public function proCrear()
 	{
-
+		$data=[];
+		$data['csrf']=$this->security->get_csrf_hash();
+		$this->form_validation->set_rules('tipo_lic_desc', 'Tipo licencia', 'trim|required');
+		if ($this->form_validation->run() == TRUE) {
+			$this->mtipolicencia->insert(['tipo_lic_desc' => $this->input->post('tipo_lic_desc', TRUE)]);
+			$data['success'] = 'Se agrego nuevo tipo licencia';
+		} else {
+			$data['error'] = validation_errors('<br>');
+		}
+		echo json_encode($data);
 	}
 
-	// Add a new item
-	public function add()
+	public function proEditar()
 	{
-
+		$data=[];
+		$data['csrf']=$this->security->get_csrf_hash();
+		$this->form_validation->set_rules('tipo_lic_desc', 'Tipo licencia', 'trim|required');
+		$this->form_validation->set_rules('tipo_lic_id', 'Id Tipo licencia', 'trim|required');
+		if ($this->form_validation->run() == TRUE) {
+			$this->mtipolicencia->update(['tipo_lic_id' => $this->input->post('tipo_lic_id', TRUE)],['tipo_lic_desc' => $this->input->post('tipo_lic_desc', TRUE)]);
+			$data['success'] = 'Se modifico el tipo licencia';
+		} else {
+			$data['error'] = validation_errors('<br>');
+		}
+		echo json_encode($data);
 	}
 
-	//Update one item
-	public function update( $id = NULL )
+	public function proEliminar()
 	{
-
-	}
-
-	//Delete one item
-	public function delete( $id = NULL )
-	{
-
+		$data=[];
+		$data['csrf']=$this->security->get_csrf_hash();
+		$this->form_validation->set_rules('tipo_lic_id', 'Id Tipo licencia', 'trim|required');
+		if ($this->form_validation->run() == TRUE) {
+			$exist = $this->mlicencia->get(['tipo_lic_id' => $this->input->post('tipo_lic_id', TRUE)]);
+			if (empty($exist)) {
+				$this->mtipolicencia->delete(['tipo_lic_id' => $this->input->post('tipo_lic_id', TRUE)]);
+				$data['success']= 'Se elimino el tipo licencia';	
+			} else {
+				$data['error'] ='No se pudo eliminar el tipo licencia';
+			}
+		} else {
+			$data['error'] = validation_errors('<br>');
+		}
+		echo json_encode($data);
 	}
 }
 

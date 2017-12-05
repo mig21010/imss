@@ -67,7 +67,7 @@ class Sustitucion extends CI_Controller {
 				if (count($exist) < 3) {
 					$exist = $this->msustitucion->get(['emp_matr_id'=>$values['sus_emp'],'sus_est' => '1', 'sus_fech' => $values['sus_fech']], 1);
 						/*valida que el usuario sustituto no tenga guardias en la fecha*/
-						if (!empty($exist)) {
+						if (empty($exist)) {
 							if ($this->msustitucion->insert($values)) {
 								$data['success'] = 'Se genero correctamente el formato.';
 							} else {
@@ -95,9 +95,42 @@ class Sustitucion extends CI_Controller {
 		];
 		$this->load->view('sustitucion/pdf', $data);
 	}
-	public function delete( $id = NULL )
-	{
 
+	public function proEliminar()
+	{
+		$data = [];
+		$data['csrf'] = $this->security->get_csrf_hash();
+		$exist = $this->msustitucion->get(['sus_id' => $this->input->post('sus_id', TRUE), 'sus_est' => 0], 1);
+		if (!empty($exist)) {
+			if ($this->msustitucion->delete(['sus_id' => $this->input->post('sus_id', TRUE), 'sus_est' => 0])) {
+				$data['success'] = 'Se elimino el formato.';
+			} else {
+				$data['error'] = 'No se pudo eliminar formato.';	
+			}
+		}else{
+			$data['error'] = 'No se pudo eliminar formato.';
+		}
+		echo json_encode($data);
+	}
+
+	public function proEstatus()
+	{
+		$data = [];
+		$data['csrf'] = $this->security->get_csrf_hash();
+		$exist = $this->msustitucion->get(['sus_id' => $this->input->post('sus_id', TRUE)], 1);
+		if (!empty($exist)) {
+			if ($exist->sus_est == 1) {
+				$set = ['sus_est' => 0];
+				$this->msustitucion->update(['sus_id' => $this->input->post('sus_id', TRUE)], $set);
+			} else {
+				$set = ['sus_est' => 1];
+				$this->msustitucion->update(['sus_id' => $this->input->post('sus_id', TRUE)], $set);
+			}
+			$data['success'] = 'Se modifico estatus.';
+		}else{
+			$data['error'] = 'No se pudo modificar estatus.';
+		}
+		echo json_encode($data);	
 	}
 }
 

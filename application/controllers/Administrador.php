@@ -6,6 +6,9 @@ class Administrador extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 
 	}
 
@@ -189,12 +192,39 @@ class Administrador extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	//Delete one item
-	public function delete( $id = NULL )
+	public function proAdministrador( $id = NULL )
 	{
-
+		$data = [];
+		$data['csrf'] = $this->security->get_csrf_hash();
+		$exist = $this->madministrador->get(['usu_id' => $this->input->post('usu_id', TRUE)], 1);
+		if (!empty($exist)) {
+			$this->madministrador->delete(['usu_id' => $this->input->post('usu_id', TRUE)]);	
+			$data['success'] = 'El empleado dejo de ser administrador.';
+		}else{
+			$this->madministrador->insert(['usu_id' => $this->input->post('usu_id', TRUE), 'adm_est' => 1]);
+			$data['success'] = 'El empleado es ahora administrador.';
+		}
+		echo json_encode($data);
 	}
-
+	public function proEstatus()
+	{
+		$data = [];
+		$data['csrf'] = $this->security->get_csrf_hash();
+		$exist = $this->mempleado->get(['usu_id' => $this->input->post('usu_id', TRUE)], 1);
+		if (!empty($exist)) {
+			if ($exist->emp_est == 1) {
+				$set = ['emp_est' => 0];
+				$this->mempleado->update(['usu_id' => $this->input->post('usu_id', TRUE)], $set);
+			} else {
+				$set = ['emp_est' => 1];
+				$this->mempleado->update(['usu_id' => $this->input->post('usu_id', TRUE)], $set);
+			}
+			$data['success'] = 'Se modifico estatus.';
+		}else{
+			$data['error'] = 'No se pudo modificar estatus.';
+		}
+		echo json_encode($data);
+	}
 	
 }
 
