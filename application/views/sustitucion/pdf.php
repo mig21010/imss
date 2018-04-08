@@ -1,100 +1,57 @@
 <?php
-//============================================================+
-// File name   : example_051.php
-// Begin       : 2009-04-16
-// Last Update : 2013-05-14
-//
-// Description : Example 051 for TCPDF class
-//               Full page background
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
-
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Full page background
- * @author Nicola Asuni
- * @since 2009-04-16
- */
-
-// Include the main TCPDF library (search for installation path).
 $this->load->library('pdf');
 
-// Extend the TCPDF class to create custom Header and Footer
-class MYPDF extends TCPDF {
-    //Page header
-    public function Header() {
-        // get the current page break margin
-        $bMargin = $this->getBreakMargin();
-        // get current auto-page-break mode
-        $auto_page_break = $this->AutoPageBreak;
-        // disable auto-page-break
-        $this->SetAutoPageBreak(false, 0);
-        // set bacground image
-        $img_file = base_url().'assets/img/sustitucion-1.jpg';
-        $this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
-        // restore auto-page-break status
-        $this->SetAutoPageBreak($auto_page_break, $bMargin);
-        // set the starting point for the page content
-        $this->setPageMark();
-    }
-}
+$MiPDF=new TCPDF();
+# creamos una página en blanco
+$MiPDF->Addpage();
+$MiPDF->SetFontSize('7');
+$MiPDF->Image(base_url().'/assets/img/sustitucion.png', 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
+$MiPDF->Multicell ('', '', $emp_a->emp_matr_id, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='140', $y='58', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$MiPDF->Multicell ('', '', $emp_a->emp_nom.' '.$emp_a->emp_ape_pat.''.$emp_a->emp_ape_mat , $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='70', $y='58', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$cat = $this->mcategoria->get(['cat_id' => $emp_a->cat_id],1);
+$MiPDF->Multicell ('', '', $cat->cat_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='47', $y='63', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 051');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$MiPDF->Multicell ('', '', $emp_a->emp_adsc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='110', $y='63', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$dep = $this->mdepartamento->get(['dep_id' => $emp_a->dep_id],1);
+$MiPDF->Multicell ('', '', $dep->dep_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='134', $y='63', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$MiPDF->Multicell ('', '', $emp_a->emp_turn, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='50', $y='68', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+$MiPDF->Multicell ('', '', $emp_a->emp_entr.'-'.$emp_a->emp_sali, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='90', $y='68', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(0);
-$pdf->SetFooterMargin(0);
+$MiPDF->Multicell ('', '', $emp_a->emp_dia_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='138', $y='68', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+/*empleado b*/
+$MiPDF->Multicell ('', '', $emp_b->emp_matr_id, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='140', $y='78', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// remove default footer
-$pdf->setPrintFooter(false);
+$MiPDF->Multicell ('', '', $emp_b->emp_nom.' '.$emp_b->emp_ape_pat.''.$emp_b->emp_ape_mat , $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='70', $y='78', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$cat = $this->mcategoria->get(['cat_id' => $emp_b->cat_id],1);
+$MiPDF->Multicell ('', '', $cat->cat_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='47', $y='83', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$MiPDF->Multicell ('', '', $emp_b->emp_adsc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='110', $y='83', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$dep = $this->mdepartamento->get(['dep_id' => $emp_b->dep_id],1);
+$MiPDF->Multicell ('', '', $dep->dep_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='134', $y='83', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+$MiPDF->Multicell ('', '', $emp_b->emp_turn, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='50', $y='88', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set some language-dependent strings (optional)
-if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-    require_once(dirname(__FILE__).'/lang/eng.php');
-    $pdf->setLanguageArray($l);
-}
+$MiPDF->Multicell ('', '', $emp_b->emp_entr.'-'.$emp_b->emp_sali, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='90', $y='88', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// ---------------------------------------------------------
+$MiPDF->Multicell ('', '', $emp_b->emp_dia_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='138', $y='88', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+/*info sustitucion*/
+$MiPDF->Multicell ('', '', $sus->sus_fech, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='70', $y='100', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $sus->sus_hora, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='140', $y='100', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $sus->sus_turn, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='70', $y='105', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$dep = $this->mdepartamento->get(['dep_id' => $emp_a->dep_id],1);
+$MiPDF->Multicell ('', '', $dep->dep_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='128', $y='105', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+/*se compromete*/
+$MiPDF->Multicell ('', '', $emp_a->emp_nom.' '.$emp_a->emp_ape_pat.''.$emp_a->emp_ape_mat , $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='60', $y='165', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $emp_a->emp_matr_id, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='140', $y='165', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$cat = $this->mcategoria->get(['cat_id' => $emp_a->cat_id],1);
+$MiPDF->Multicell ('', '', $cat->cat_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='47', $y='170', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $emp_a->emp_adsc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='112', $y='170', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 
-// set font
-$pdf->SetFont('times', '', 48);
+$MiPDF->Addpage();
+$MiPDF->Image(base_url().'/assets/img/licencia.jpeg', 0, 0, 210, 160, '', '', '', false, 300, '', false, false, 0);
 
-// add a page
-$pdf->AddPage();
-// ---------------------------------------------------------
+$MiPDF->Output();
 
-//Close and output PDF document
-$pdf->Output('example_051.pdf', 'I');
-
-//============================================================+
-// END OF FILE
-//============================================================+

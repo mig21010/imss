@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- sweet alerts -->
 <script src="<?= base_url().'vendor/sweetalert2/dist/sweetalert2.min.js' ?>"></script>
+
 <link rel="stylesheet" href="<?= base_url().'vendor/sweetalert2/dist/sweetalert2.min.css' ?>">
 <!-- include styles bootstrap v4 -->
 <link rel="stylesheet" href="<?= base_url()."vendor/bootstrap/dist/css/bootstrap.min.css";?>">

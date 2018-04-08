@@ -160,7 +160,7 @@
 						</div>
 					</div>
 					<div class="row">
-						
+
 					</div>
 					<div class="text-center">
 						<button type="submit" id="send" class="btn bg-success text-white" disabled><i class="fa fa-check"></i> Generar</button>
@@ -188,7 +188,7 @@ $(document).ready(function() {
 		postAjax($(this).attr('action'), data, function(response){
 			if (response.success != undefined) {
 				swal('Se proceso la información',response.success,'info');
-				/*setInterval(function(){ window.location = '<?= site_url()."/administrador/index" ?>';}, 3000);*/
+				setInterval(function(){ window.location = '<?= site_url()."/sustitucion/index" ?>';}, 3000);
 			} else {
 				swal('Hubo un problema.',response.error,'error');
 			}

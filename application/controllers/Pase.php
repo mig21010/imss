@@ -55,7 +55,8 @@ class Pase extends CI_Controller {
 				'pas_hora_ini'=> $this->input->post('pas_hora_ini', TRUE),
 				'pas_acti'=>$this->input->post('pas_acti', TRUE),
 				'pas_moti'=>$this->input->post('pas_moti', TRUE),
-				'pas_est' => 0
+				'pas_est' => 0,
+				'pase_simbolo' => 'X'
 			];
 			if ($this->mpase->insert($values)) {
 				$data['success'] = 'Se registro formato pase.';
@@ -69,9 +70,16 @@ class Pase extends CI_Controller {
 	}
 
 	//Delete one item
-	public function pdf()
+	
+	public function pdf($pas_id = '')
 	{
-
+		$pase = $this->mpase->get(['pas_id' => $pas_id], 1);
+		$data = [
+		'emp' => $this->mempleado->get(['emp_matr_id' => $pase->emp_matr_id],1),
+		// 	'emp_b' => $this->mempleado->get(['emp_matr_id' => $sustitucion->sus_emp],1),
+		'pas' => $pase,
+		];
+		$this->load->view('pase/pdf', $data);
 	}
 }
 

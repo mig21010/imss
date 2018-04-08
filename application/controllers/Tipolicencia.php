@@ -6,7 +6,9 @@ class Tipolicencia extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//Load Dependencies
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 
 	}
 	public function proCrear()

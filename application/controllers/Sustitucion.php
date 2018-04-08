@@ -26,8 +26,10 @@ class Sustitucion extends CI_Controller {
 		}else{
 			redirect(site_url(),'refresh');
 		}
+		$data['count'] = $this->msustitucion->get_monthly_sust(); 
+		 // var_dump($data);
 		$this->utilidades->layouts('sustitucion/index', $data);
-
+		
 	}
 
 	public function crear()
@@ -61,10 +63,12 @@ class Sustitucion extends CI_Controller {
 			];
 			/*valida que no sea la misma matricula*/
 			if ($values['emp_matr_id'] != $values['sus_emp']) {
-				$exist = $this->msustitucion->get(['emp_matr_id'=>$values['emp_matr_id'],'sus_est' => '1', 'create_at >' => date('mm')]);
-				$data['count'] = count($exist);
-				/*valida que no tenga mas de 3 sustituciones aprobadas en el mes*/
-				if (count($exist) < 3) {
+				// $exist = $this->msustitucion->get(['emp_matr_id'=>$values['emp_matr_id'],'sus_est' => '1', 'create_at > ' => date('m')]);
+				// $data['query'] = $this->msustitucion->countRow(); 
+				// $exist = $this->msustitucion->get('emp_matr_id'=>$values['emp_matr_id'], 'sus_fech'=>$values['sus_fech']);
+				// $data['count'] = count($exist);
+				/*valida que no tenga mas de 6 sustituciones aprobadas en el mes*/
+				if ($data['count'] = $this->msustitucion->get_monthly_sust($this->input->post('emp_matr_id', TRUE))  < 6) {
 					$exist = $this->msustitucion->get(['emp_matr_id'=>$values['sus_emp'],'sus_est' => '1', 'sus_fech' => $values['sus_fech']], 1);
 						/*valida que el usuario sustituto no tenga guardias en la fecha*/
 						if (empty($exist)) {
@@ -77,7 +81,7 @@ class Sustitucion extends CI_Controller {
 							$data['error'] = 'El usuario sustituto ya tiene una guardia.';
 						}
 				} else {
-					$data['error'] = 'No se puede tener más de 3 sustituciones en el mes.';	
+					$data['error'] = 'No se puede tener más de 6 sustituciones en el mes.';	
 				}	
 			}else{
 				$data['error'] = 'No se puede generar una matricula del mismo empleado.';
@@ -90,8 +94,11 @@ class Sustitucion extends CI_Controller {
 
 	public function pdf($sus_id = '')
 	{
+		$sustitucion = $this->msustitucion->get(['sus_id' => $sus_id], 1);
 		$data = [
-			'sustitucion' => $this->msustitucion->get(['sus_id' => $sus_id], 1),
+			'emp_a' => $this->mempleado->get(['emp_matr_id' => $sustitucion->emp_matr_id],1),
+			'emp_b' => $this->mempleado->get(['emp_matr_id' => $sustitucion->sus_emp],1),
+			'sus' => $sustitucion,
 		];
 		$this->load->view('sustitucion/pdf', $data);
 	}
@@ -132,6 +139,21 @@ class Sustitucion extends CI_Controller {
 		}
 		echo json_encode($data);	
 	}
+	function your_method_model()
+	{
+        return $this->msustitucion->count_all_results(
+               ['emp_matr_id'],
+               ['fech_sus'],
+               ['sustitucion']
+           );
+	}
+
+	public function countTotalrow(){	
+     $data['query'] = $this->msustitucion->countRow(); 
+     var_dump($data);
+     $this->utilidades->layouts('sustitucion/index', $data);	
+}
+
 }
 
 /* End of file Sustitucion.php */

@@ -11,6 +11,9 @@ class Empleado extends CI_Controller {
 
 	public function index( $offset = 0 )
 	{
+		if (!$this->session->has_userdata('emp')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [
 			'usuario' => $this->mempleado->get(['usu_id'=>$this->session->userdata('emp')], 1),
 			'categorias' => $this->mcategoria->get(),
@@ -22,6 +25,9 @@ class Empleado extends CI_Controller {
 
 	public function registro()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [
 			'categorias' => $this->mcategoria->get(),
 			'departamentos' => $this->mdepartamento->get(),
@@ -32,6 +38,9 @@ class Empleado extends CI_Controller {
 
 	public function proRegistro()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('usu_corr', 'Correo Electrónico', 'trim|required|valid_email|max_length[100]|is_unique[usuario.usu_corr]');
@@ -46,7 +55,7 @@ class Empleado extends CI_Controller {
 		$this->form_validation->set_rules('emp_sali', 'Horario de salida', 'trim|required');
 		$this->form_validation->set_rules('emp_turn', 'Turno', 'trim|required');
 		$this->form_validation->set_rules('emp_dia_desc', 'Dias de descanso', 'trim|required');
-		$this->form_validation->set_rules('emp_ads', 'Adscripción', 'trim|required');
+		$this->form_validation->set_rules('emp_adsc', 'Adscripción', 'trim|required');
 		if ($this->form_validation->run() == TRUE) {
 			$values = [
 				'usu_corr' => $this->input->post('usu_corr', TRUE),
@@ -125,6 +134,9 @@ class Empleado extends CI_Controller {
 
 	public function editar($matricula = '')
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [
 			'usuario' => $this->mempleado->get(['emp_matr_id'=>$matricula], 1),
 			'categorias' => $this->mcategoria->get(),
@@ -136,6 +148,9 @@ class Empleado extends CI_Controller {
 
 	public function proEditar( $id = NULL )
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('emp_matr_id', 'Matricula', 'trim|required|max_length[20]');
@@ -176,6 +191,9 @@ class Empleado extends CI_Controller {
 
 	public function changePass()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('usu_id', 'Usuario id', 'trim|required|numeric');
@@ -197,6 +215,9 @@ class Empleado extends CI_Controller {
 
 	public function info()
 	{
+		// if (!$this->session->has_userdata('admin')) {
+		// 	redirect(site_url(),'refresh');
+		// }
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('sus_emp', 'Empleado sustituto', 'trim|required|max_length[20]');
@@ -213,10 +234,13 @@ class Empleado extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	//Delete one item
-	public function delete( $id = NULL )
+	public function guardias()
 	{
-
+		$emp = $this->mempleado->get(['usu_id'=>$this->session->userdata('emp')], 1);
+		$data = [
+			'guardias' => $this->msustitucion->get(['sus_emp'=>$emp->emp_matr_id,'sus_est' => 1])
+		];
+		$this->utilidades->layouts('empleado/guardias', $data);
 	}
 }
 

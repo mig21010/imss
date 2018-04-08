@@ -12,7 +12,10 @@
 						<div class="col-10">
 							<h1 class="text-center">Formatos de Sustituciones</h1>
 						</div>
-						<div class="col-2 text-right">
+						<div class="col-4 text-right">
+							<button class="btn bg-success btn-lg text-white">Control</button>
+						</div>
+						<div class="col-4 text-right">
 							<button class="btn bg-success btn-lg text-white" onclick="crearFormato()">Crear</button>
 						</div>
 					</div>
@@ -30,6 +33,7 @@
 							<?php endif ?>
 							<th>Estatus</th>
 							<th>Eliminar</th>
+							<th>PDF</th>
 						</thead>
 						<tbody>
 							<?php if (!empty($sustituciones)): ?>
@@ -57,6 +61,7 @@
 				</div>
 			</div>
 		</div>
+	<?php echo $count;  ?>
 	</body>
 </html>
 <script>

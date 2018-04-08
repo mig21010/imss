@@ -30,7 +30,7 @@ private $table = 'sustitucion';
 		
 	}
 
-/*where es un arreglo asociativo, limit es un numero, order_by es una cadena de caracteres, y direaction puede ser asc o desc*/
+/*where es un arreglo asociativo,where limit es un numero, order_by es una cadena de caracteres, y direaction puede ser asc o desc*/
 	public function get($where = '', $limit = '', $order_by = '',  $direction = '')
 	{
 		if ($where != '') {
@@ -65,8 +65,75 @@ private $table = 'sustitucion';
 		}
 		
 	}
+	function count_all_results($column_name = array(),$where=array(), $table_name = array())
+	{
+        $this->db->select($column_name);
+        // If Where is not NULL
+        if(!empty($where) && count($where) > 0 )
+        {
+            $this->db->where($where);
+        }
+        // Return Count Column
+        return $this->db->count_all_results($table_name[0]);//table_name array sub 0
+	}
 
+
+	// public function get_monthly_sust($emp_matr_id = ''){
+		
+	// 	// $query = $this->db->query("SELECT * FROM sustitucion WHERE emp_matr_id = 0000000000000 WHERE sus_fech BETWEEN $from AND $to");
+	// 	// return $query->num_rows();
+	// 	// get this month 
+ //        //(but you might set this as a variable so you can look at different months too)
+ //        $date_range = date('F Y');
+       
+ //        // set start of month
+ //        $date = new DateTime($date_range);
+ //        $start_date = $date->format('Y-m-d G:i:s');
+        
+ //        // set end of month and time to last second of month 
+ //        $date->modify('last day of this month')->setTime(23,59,59);
+ //        $end_date = $date->format('Y-m-d G:i:s');
+        
+ //        //  do a search with dates
+ //        $count = $this->db->from('sustitucion')
+ //        	->where('emp_matr_id', $emp_matr_id)
+ //            ->where('sus_fech >=', $start_date)
+ //            ->where('sus_fech <=', $end_date)
+ //            ->count_all_results();
+        
+ //        return $count; 
+	// }
+	public function get_monthly_sust() {
+
+        $date_range = date('F Y');
+ 
+        $date = new DateTime($date_range);
+        $start_date = $date->format('Y-m-d G:i:s');
+        
+        $date->modify('last day of this month')->setTime(23,59,59);
+        $end_date = $date->format('Y-m-d G:i:s');
+        
+        $count = $this->db->from('sustitucion')
+        	->where('emp_matr_id=41407398')
+            ->where('sus_fech >=', $start_date)
+            ->where('sus_fech <=', $end_date)
+            ->count_all_results();
+        
+        return $count; 
+	}
 }
+// public function count_all($table,$date)
+// {
+//     $this->db->select('emp_matr_id');
+//     $this->db->from($table);
+//     $this->db->where('sus_fech >=', $start_date);
+//     $this->db->where('sus_fech <=', $end_date);
+//     $this->db->order_by('sus_fech','desc');
+//     $this->db->group_by('MONTH(sus_fech), YEAR(sus_fech)');
+//     $num_results = $this->db->count_all_results();
+// }
+// p
+// SELECT count(*) FROM `sustitucion` WHERE emp_matr_id = "0000000000000" WHERE sus_fech BETWEEN '2018-03-01' AND '2018-03-31'
 
 /* End of file Sustitucion.php */
 /* Location: ./application/models/Sustitucion.php */

@@ -6,14 +6,13 @@ class Administrador extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->has_userdata('admin')) {
-			redirect(site_url(),'refresh');
-		}
-
 	}
 
 	public function index( $offset = 0 )
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [
 			'usuario' => $this->mempleado->get(['usu_id'=>$this->session->userdata('admin')], 1),
 			'categorias' => $this->mcategoria->get(),
@@ -27,6 +26,9 @@ class Administrador extends CI_Controller {
 
 	public function registro()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [
 			'categorias' => $this->mcategoria->get(),
 			'departamentos' => $this->mdepartamento->get(),
@@ -37,6 +39,9 @@ class Administrador extends CI_Controller {
 
 	public function proRegistro()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('usu_corr', 'Correo Electrónico', 'trim|required|valid_email|max_length[100]|is_unique[usuario.usu_corr]');
@@ -133,6 +138,9 @@ class Administrador extends CI_Controller {
 
 	public function proEditar( $id = NULL )
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('emp_matr_id', 'Matricula', 'trim|required|max_length[20]');
@@ -173,6 +181,9 @@ class Administrador extends CI_Controller {
 
 	public function changePass()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$this->form_validation->set_rules('usu_id', 'Usuario id', 'trim|required|numeric');
@@ -194,6 +205,9 @@ class Administrador extends CI_Controller {
 
 	public function proAdministrador( $id = NULL )
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$exist = $this->madministrador->get(['usu_id' => $this->input->post('usu_id', TRUE)], 1);
@@ -208,6 +222,9 @@ class Administrador extends CI_Controller {
 	}
 	public function proEstatus()
 	{
+		if (!$this->session->has_userdata('admin')) {
+			redirect(site_url(),'refresh');
+		}
 		$data = [];
 		$data['csrf'] = $this->security->get_csrf_hash();
 		$exist = $this->mempleado->get(['usu_id' => $this->input->post('usu_id', TRUE)], 1);
@@ -225,6 +242,7 @@ class Administrador extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
+	
 	
 }
 
