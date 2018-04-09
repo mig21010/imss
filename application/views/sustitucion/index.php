@@ -13,7 +13,7 @@
 							<h1 class="text-center">Formatos de Sustituciones</h1>
 						</div>
 						<div class="col-4 text-right">
-							<button class="btn bg-success btn-lg text-white">Control</button>
+							<button class="btn bg-success btn-lg text-white" onclick="control()">Control</button>
 						</div>
 						<div class="col-4 text-right">
 							<button class="btn bg-success btn-lg text-white" onclick="crearFormato()">Crear</button>
@@ -67,6 +67,9 @@
 <script>
 function crearFormato(){
 window.location = '<?= site_url()."/sustitucion/crear" ?>';
+}
+function control(){
+	window.location = '<?= site_url()."/sustitucion/control" ?>';
 }
 
 function eliminar(id = ''){

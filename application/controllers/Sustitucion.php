@@ -91,6 +91,10 @@ class Sustitucion extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
+	public function control(){
+		$this->utilidades->layouts('sustitucion/control');
+
+	}
 
 	public function pdf($sus_id = '')
 	{
