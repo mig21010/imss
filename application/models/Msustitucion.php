@@ -121,7 +121,30 @@ private $table = 'sustitucion';
         
         return $count; 
 	}
+
+	public function get_monthly_sust_all(){
+		$date_range = date('F Y');
+ 
+        $date = new DateTime($date_range);
+        $start_date = $date->format('Y-m-d G:i:s');
+        
+        $date->modify('last day of this month')->setTime(23,59,59);
+        $end_date = $date->format('Y-m-d G:i:s');
+        
+        	$this->db->from('sustitucion');
+        	$this->db->select('*');
+            $this->db->where('sus_fech >=', $start_date);
+            $this->db->where('sus_fech <=', $end_date);
+            $count = $this->db->get();
+            $num_of_records = $count->num_rows();
+             if($num_of_records > 0){
+       			 $results = $count->result_array();
+   			}   
+    		return $results;
+       
+	}
 }
+
 // public function count_all($table,$date)
 // {
 //     $this->db->select('emp_matr_id');
