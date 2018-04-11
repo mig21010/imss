@@ -18,11 +18,19 @@
 				<div class="card-body">
 					<table class="table table-responsive">
 						<thead>
-							<th>Matricula Sustitución</th>
+							<th>Número de Sustituciones</th>
 							<th>Empleado</th>
 							<th>Fecha de susutitución</th>
-							<th>Número de Sustituciones</th>
+							<th>Matricula</th>
 						</thead>
+						<tbody>
+							<?php foreach($query as $value):?> 
+							<tr>
+								<th><?=$value->emp_matr_id ?></th>
+							</tr>
+							<?php endforeach ?>
+						
+						</tbody>
 					</table>
 				</div>
 			</div>
