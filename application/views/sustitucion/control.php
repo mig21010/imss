@@ -26,7 +26,7 @@
 						<tbody>
 							<?php foreach($query as $value):?> 
 							<tr>
-								<th><?=$value->emp_matr_id ?></th>
+								<th><?=$value->num_sust ?></th>
 							</tr>
 							<?php endforeach ?>
 						

@@ -130,7 +130,7 @@ private $table = 'sustitucion';
         
   //       $date->modify('last day of this month')->setTime(23,59,59);
   //       $end_date = $date->format('Y-m-d G:i:s');
-        $query = $this->db->select('COUNT(*)emp_matr_id,sus_emp,MONTHNAME(sus_fech),YEAR(sus_fech)')
+        $query = $this->db->select('COUNT(*) as num_sust,emp_matr_id,sus_id,MONTHNAME(sus_fech),YEAR(sus_fech)')
         	->from('sustitucion')
             // ->where('sus_fech >=', $start_date)
             // ->where('sus_fech <=', $end_date)
