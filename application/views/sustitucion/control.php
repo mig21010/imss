@@ -16,20 +16,32 @@
 					
 				</div>
 				<div class="card-body">
-					<table class="table table-responsive">
+				<div class="row">
+					<div class="col-lg-4 col-md-8 col-8">
+					<input type="text" name="search" class="form-control">
+				</div>
+				<div class="">
+					<button  class="btn bg-success text-white">Buscar</button>
+				</div>
+				</div>
+				
+					<table id="tblsustitucion" class="table table-responsive">
 						<thead>
 							<th>Número de Sustituciones</th>
-							<th>Empleado</th>
-							<th>Fecha de susutitución</th>
-							<th>Matricula</th>
+							<th>Matrícula</th>
+							<th>Mes de susutitución</th>
+							<th>Año de sustitución</th>
 						</thead>
 						<tbody>
-							<?php foreach($query as $value):?> 
-							<tr>
-								<th><?=$value->num_sust ?></th>
-							</tr>
-							<?php endforeach ?>
-						
+						<?php foreach($query as $value): ?>
+						<tr>
+							<td><?= $value->num_sust ?></td>
+							<td><?= $value->emp_matr_id ?></td>
+							<td><?= $value->month?></td>
+							<td><?= $value->year?></td>
+						</tr>
+							
+						<?php endforeach ?>
 						</tbody>
 					</table>
 				</div>
@@ -37,3 +49,31 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+	// $(document).ready(function(){
+	// 	$.post('<?= site_url()."/sustitucion/control" ?>',
+	// 	function(data) {
+	// 		// alert(data);
+	// 		var obj = JSON.parse(data);
+	// 		$.each(obj, function(i, item){
+	// 			$('#tblsustitucion').append(
+	// 				'<tr>'+
+	// 				'<td>'+item.num_sust+'</td>'+
+	// 				'<td>'+item.emp_matr_id+'</td>'+
+	// 				'<td>'+item.month+'</td>'+
+	// 				'<td>'+item.year+'</td>'+
+	// 				'</tr>'
+	// 				);
+
+	// 		});
+			
+	// 	});
+	// });
+ 	
+	// $('#tblsustitucion').DataTable({
+	// 	'paging':true,
+	// 	'info':false,
+	// 	'filter':true 
+
+	// });
+</script>

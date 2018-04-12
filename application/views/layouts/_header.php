@@ -40,7 +40,7 @@
 						<a class="dropdown-item" href="<?= site_url().'/justificacion/index' ?>">Formato justificación</a>
 						<a class="dropdown-item" href="<?= site_url().'/licencia/index' ?>">Formato licencia</a>
 						<div class="dropdown-divider"></div>
-						<h6 class="dropdown-header">Cerra Sesión</h6>
+						<h6 class="dropdown-header">Cerrar Sesión</h6>
 						<a class="dropdown-item" href="<?= site_url().'/main/close_session' ?>">Cerrar Sesión</a>
 					</div>
 				</li>
