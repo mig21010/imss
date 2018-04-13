@@ -18,7 +18,7 @@
 				<div class="card-body">
 				<div class="row">
 					<div class="col-lg-4 col-md-8 col-8">
-					<input type="text" name="search" class="form-control">
+					<input type="text" name="text_search" id="text_search" class="form-control">
 				</div>
 				<div class="">
 					<button  class="btn bg-success text-white">Buscar</button>
