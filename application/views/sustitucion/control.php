@@ -29,6 +29,9 @@
 						<thead>
 							<th>Número de Sustituciones</th>
 							<th>Matrícula</th>
+							<th>Nombre</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
 							<th>Mes de susutitución</th>
 							<th>Año de sustitución</th>
 						</thead>
@@ -37,6 +40,9 @@
 						<tr>
 							<td><?= $value->num_sust ?></td>
 							<td><?= $value->emp_matr_id ?></td>
+							<td><?= $value->emp_nom?></td>
+							<td><?= $value->emp_ape_pat?></td>
+							<td><?= $value->emp_ape_mat?></td>
 							<td><?= $value->month?></td>
 							<td><?= $value->year?></td>
 						</tr>

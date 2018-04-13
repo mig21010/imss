@@ -123,14 +123,15 @@ private $table = 'sustitucion';
 	}
 
 	public function get_monthly_sust_all(){
-        $query = $this->db->select('COUNT(*) as num_sust,emp_matr_id,sus_id,MONTHNAME(sus_fech) as month,YEAR(sus_fech) as year')
-        	->from('sustitucion')
-            ->group_by('emp_matr_id')
-            ->group_by('MONTH(sus_fech), YEAR(sus_fech)');
+        $query = $this->db->select('COUNT(*) as num_sust,s.emp_matr_id,e.emp_nom,e.emp_ape_pat,e.emp_ape_mat,s.sus_id,MONTHNAME(s.sus_fech) as month,YEAR(s.sus_fech) as year')
+        	->from('sustitucion as s')
+            ->group_by('s.emp_matr_id')
+            ->group_by('MONTH(s.sus_fech), YEAR(s.sus_fech)')
+            ->join('empleado as e', 's.emp_matr_id = e.emp_matr_id');
             $query = $this->db->get();
-			$result = $query->result(); 
+			// $result = $query->result(); 
 			// var_dump($result); 
-			return $result;
+			// return $result;
 
     	return $query->result();
        
