@@ -32,7 +32,7 @@
 							<th>Nombre</th>
 							<th>Apellido Paterno</th>
 							<th>Apellido Materno</th>
-							<th>Mes de susutitución</th>
+							<th>Mes de sustitución</th>
 							<th>Año de sustitución</th>
 						</thead>
 						<tbody>
