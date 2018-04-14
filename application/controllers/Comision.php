@@ -71,7 +71,8 @@ class Comision extends CI_Controller {
 				'com_ant_otor'=>$this->input->post('com_ant_otor', TRUE),
 				'com_comp_pres'=>$this->input->post('com_comp_pres', TRUE),
 				'com_saldo'=>$this->input->post('com_saldo', TRUE),
-				'com_est' => 0
+				'com_est' => 0,
+				'com_simbolo' => 'X'
 
 			];
 			if ($this->mcomision->insert($values) ) {
