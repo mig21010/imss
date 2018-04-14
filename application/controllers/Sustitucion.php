@@ -28,8 +28,7 @@ class Sustitucion extends CI_Controller {
 		}
 		$data['count'] = $this->msustitucion->get_monthly_sust(); 
 		 // var_dump($data);
-		$this->utilidades->layouts('sustitucion/index', $data);
-		
+		$this->utilidades->layouts('sustitucion/index', $data);		
 	}
 
 	public function crear()
@@ -92,11 +91,15 @@ class Sustitucion extends CI_Controller {
 		echo json_encode($data);
 	}
 	public function control(){
-		
-		$data['query'] = $this->msustitucion->get_monthly_sust_all();
+		$query = [];
+		$query['csrf'] = $this->security->get_csrf_hash();
+		$search = $this->input->post('search');
+        $query = $this->msustitucion->get_monthly_sust_all($search); 
+        echo json_encode($query);
+		// $data['query'] = $this->msustitucion->get_monthly_sust_all();
 		// print_r($data);
-		$this->utilidades->layouts('sustitucion/control',$data);
-		// echo json_encode($this->msustitucion->get_monthly_sust_all());
+		$this->utilidades->layouts('sustitucion/control',$query);
+		// // echo json_encode($this->msustitucion->get_monthly_sust_all());
 
 
 	}
