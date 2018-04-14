@@ -26,8 +26,7 @@ class Sustitucion extends CI_Controller {
 		}else{
 			redirect(site_url(),'refresh');
 		}
-		$data['count'] = $this->msustitucion->get_monthly_sust(); 
-		 // var_dump($data);
+		
 		$this->utilidades->layouts('sustitucion/index', $data);
 		
 	}
@@ -63,10 +62,6 @@ class Sustitucion extends CI_Controller {
 			];
 			/*valida que no sea la misma matricula*/
 			if ($values['emp_matr_id'] != $values['sus_emp']) {
-				// $exist = $this->msustitucion->get(['emp_matr_id'=>$values['emp_matr_id'],'sus_est' => '1', 'create_at > ' => date('m')]);
-				// $data['query'] = $this->msustitucion->countRow(); 
-				// $exist = $this->msustitucion->get('emp_matr_id'=>$values['emp_matr_id'], 'sus_fech'=>$values['sus_fech']);
-				// $data['count'] = count($exist);
 				/*valida que no tenga mas de 6 sustituciones aprobadas en el mes*/
 				if ($data['count'] = $this->msustitucion->get_monthly_sust($this->input->post('emp_matr_id', TRUE))  < 6) {
 					$exist = $this->msustitucion->get(['emp_matr_id'=>$values['sus_emp'],'sus_est' => '1', 'sus_fech' => $values['sus_fech']], 1);

@@ -61,7 +61,7 @@
 				</div>
 			</div>
 		</div>
-	<?php echo $count;  ?>
+	
 	</body>
 </html>
 <script>
