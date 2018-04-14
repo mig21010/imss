@@ -98,7 +98,7 @@ class Sustitucion extends CI_Controller {
         echo json_encode($query);
 		// $data['query'] = $this->msustitucion->get_monthly_sust_all();
 		// print_r($data);
-		$this->utilidades->layouts('sustitucion/control',$query);
+		// $this->utilidades->layouts('sustitucion/control',$query);
 		// // echo json_encode($this->msustitucion->get_monthly_sust_all());
 
 

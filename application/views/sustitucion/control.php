@@ -49,7 +49,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		postAjax('<?= site_url()."/sustitucion/control" ?>',
-			'<?php echo $this->security->get_csrf_token_name() ?>' : '<?php echo $this->security->get_csrf_hash(); ?>',
 		function(data) {
 
 			// alert(data);
@@ -68,7 +67,7 @@
 			
 		});
 	});
- 	
+ 	</script>
 	// $('#tblsustitucion').DataTable({
 	// 	'paging':true,
 	// 	'info':false,
