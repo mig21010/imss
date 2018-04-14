@@ -78,49 +78,29 @@ private $table = 'sustitucion';
 	}
 
 
-	// public function get_monthly_sust($emp_matr_id = ''){
-		
-	// 	// $query = $this->db->query("SELECT * FROM sustitucion WHERE emp_matr_id = 0000000000000 WHERE sus_fech BETWEEN $from AND $to");
-	// 	// return $query->num_rows();
-	// 	// get this month 
- //        //(but you might set this as a variable so you can look at different months too)
- //        $date_range = date('F Y');
-       
- //        // set start of month
- //        $date = new DateTime($date_range);
- //        $start_date = $date->format('Y-m-d G:i:s');
-        
- //        // set end of month and time to last second of month 
- //        $date->modify('last day of this month')->setTime(23,59,59);
- //        $end_date = $date->format('Y-m-d G:i:s');
-        
- //        //  do a search with dates
- //        $count = $this->db->from('sustitucion')
- //        	->where('emp_matr_id', $emp_matr_id)
- //            ->where('sus_fech >=', $start_date)
- //            ->where('sus_fech <=', $end_date)
- //            ->count_all_results();
-        
- //        return $count; 
-	// }
-	public function get_monthly_sust() {
-
+	public function get_monthly_sust($emp_matr_id = ''){
+		// return $query->num_rows();
+		// get this month 
         $date_range = date('F Y');
- 
+       
+        // set start of month
         $date = new DateTime($date_range);
         $start_date = $date->format('Y-m-d G:i:s');
         
+        // set end of month and time to last second of month 
         $date->modify('last day of this month')->setTime(23,59,59);
         $end_date = $date->format('Y-m-d G:i:s');
         
+        //  do a search with dates
         $count = $this->db->from('sustitucion')
-        	->where('emp_matr_id=41407398')
+        	->where('emp_matr_id', $emp_matr_id)
             ->where('sus_fech >=', $start_date)
             ->where('sus_fech <=', $end_date)
             ->count_all_results();
         
         return $count; 
 	}
+
 
 	public function get_monthly_sust_all(){
         $query = $this->db->select('COUNT(*) as num_sust,s.emp_matr_id,e.emp_nom,e.emp_ape_pat,e.emp_ape_mat,s.sus_id,MONTHNAME(s.sus_fech) as month,YEAR(s.sus_fech) as year')
