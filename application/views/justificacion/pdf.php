@@ -11,6 +11,19 @@ $MiPDF->Multicell ('', '', $cat->cat_desc, $borde=0, $alineacion='', $fondo=fals
 $MiPDF->Multicell ('', '', $emp->emp_matr_id, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='148', $y='84', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
 $dep = $this->mdepartamento->get(['dep_id' => $emp->dep_id],1);
 $MiPDF->Multicell ('', '', $dep->dep_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='134', $y='90', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
-$MiPDF->Multicell ('', '', $jus->jus_moti, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='65', $y='115', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_fech, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='85', $y='70', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_moti, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='55', $y='115', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_omi, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='85', $y='108', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+//copia del formato
+$MiPDF->Multicell ('', '', $emp->emp_nom.' '.$emp->emp_ape_pat.' '.$emp->emp_ape_mat , $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='85', $y='188', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$cat = $this->mcategoria->get(['cat_id' => $emp->cat_id],1);
+$MiPDF->Multicell ('', '', $cat->cat_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='65', $y='195', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $emp->emp_matr_id, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='148', $y='195', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$dep = $this->mdepartamento->get(['dep_id' => $emp->dep_id],1);
+$MiPDF->Multicell ('', '', $dep->dep_desc, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='134', $y='203', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_fech, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='85', $y='182', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_moti, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='55', $y='226', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+$MiPDF->Multicell ('', '', $jus->jus_omi, $borde=0, $alineacion='', $fondo=false, $salto_de_linea=1, $x='85', $y='220', $reseth=true, $ajuste_horizontal=0, $ishtml=false, $autopadding=true, $maxh=0, $alineacion_vertical='T', $fitcell=false);
+
 $MiPDF->Output(); 
 ?>

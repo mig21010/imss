@@ -28,15 +28,15 @@
 							<label >Justificación Omisión</label>
 							<select class="form-control" required name="jus_omi">
 								<option disabled selected>Elija una opción</option>
-								<option value="0">Entrada</option>
-								<option value="1">Salida</option>
+								<option value="Entrada">Entrada</option>
+								<option value="Salida">Salida</option>
 							</select>
 					</div>
 					<div class="form-group">
 						<label for="">Motivo:</label>
 						<input type="text" class="form-control" name="jus_moti" required>
 					</div>
-					
+
 					<div class="text-center">
 						<button type="submit" class="btn bg-success btn-lg text-white"><i class="fa fa-check"></i>Enviar</button>
 					</div>
