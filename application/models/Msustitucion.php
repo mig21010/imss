@@ -122,7 +122,7 @@ private $table = 'sustitucion';
         return $count; 
 	}
 
-	public function get_monthly_sust_all($search = NULL){
+	public function get_monthly_sust_all($search){
         $query = $this->db->select('COUNT(*) as num_sust,s.emp_matr_id,e.emp_nom,e.emp_ape_pat,e.emp_ape_mat,s.sus_id,MONTHNAME(s.sus_fech) as month,YEAR(s.sus_fech) as year')
         	->from('sustitucion as s')
         	->like('s.emp_matr_id', $search)
