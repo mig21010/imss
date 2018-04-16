@@ -38,7 +38,7 @@ $(document).ready(function(){
    $("#search").keyup(function(){
        var str=  $("#search").val();
        if(str == "") {
-               $( "#txtHint" ).html("<b>Después de hacer una búsqueda tu información será mostrada aquí...</b>"); 
+               $( "#txtHint" ).html(); 
        }else {
                $.get( "<?php echo site_url();?>/sustitucion/control?sus_id="+str, function( data ){
                    $( "#txtHint" ).html( data );  
