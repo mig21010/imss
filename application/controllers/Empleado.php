@@ -238,7 +238,7 @@ class Empleado extends CI_Controller {
 	{
 		$emp = $this->mempleado->get(['usu_id'=>$this->session->userdata('emp')], 1);
 		$data = [
-			'guardias' => $this->msustitucion->get(['sus_emp'=>$emp->emp_matr_id,'sus_est' => 1])
+			'guardias' => $this->msustitucion->get(['emp_matr_id' => $emp->emp_matr_id])
 		];
 		$this->utilidades->layouts('empleado/guardias', $data);
 	}
