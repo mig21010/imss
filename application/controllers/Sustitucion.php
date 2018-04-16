@@ -90,18 +90,26 @@ class Sustitucion extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-	public function control(){
+	public function controlajax(){
 		$query = [];
 		$query['csrf'] = $this->security->get_csrf_hash();
 		$search = $this->input->post('search');
         $query = $this->msustitucion->get_monthly_sust_all($search); 
         echo json_encode($query);
+
+	}
+	public function control(){
+		if(is_null($this->input->get('emp_matr_id'))){
+			$this->utilidades->layouts('sustitucion/control');        
+		}
+        else{
+        $data['query']=$this->msustitucion->get_monthly_sust_all($this->input->get('emp_matr_id')); 
+        $this->utilidades->layouts('sustitucion/output',$data); 
+        }
 		// $data['query'] = $this->msustitucion->get_monthly_sust_all();
 		// print_r($data);
-		// $this->utilidades->layouts('sustitucion/control',$query);
-		// // echo json_encode($this->msustitucion->get_monthly_sust_all());
-
-
+		
+		// echo json_encode($this->msustitucion->get_monthly_sust_all());
 	}
 
 	public function pdf($sus_id = '')

@@ -17,61 +17,33 @@
 				</div>
 				<div class="card-body">
 				<div class="row">
-
-					<div class="col-lg-4 col-md-8 col-8">
-					<input type="text" name="query" id="query" class="form-control">
-				</div>
-				<div class="">
-					<button  class="btn bg-success text-white">Buscar</button>
-				</div>
-			
-				</div>
 				
-					<table id="tblsustitucion" class="table table-responsive">
-						<thead>
-							<th>Número de Sustituciones</th>
-							<th>Matrícula</th>
-							<th>Nombre</th>
-							<th>Apellido Paterno</th>
-							<th>Apellido Materno</th>
-							<th>Mes de susutitución</th>
-							<th>Año de sustitución</th>
-						</thead>
-						<tbody>
-						
-						</tbody>
-					</table>
+		
+				<!-- <span class="input-group-addon" >SEARCH</span>  -->
+  				<input autocomplete="off" id="search"  type="text" class="form-control input-sm" placeholder="Realiza tu búsqueda por Matrícula o Nombre del empleado" >
+	
+				<div id="txtHint" style="padding-top:50px; text-align:center;" ><b>Después de hacer una búsqueda tu información será mostrada aquí...</b></div>
+			   
 				</div>
+
+				</div>
+
 			</div>
+
 		</div>
 	</body>
 </html>
-<script type="text/javascript">
-	$(document).ready(function(){
-		postAjax('<?= site_url()."/sustitucion/control" ?>',
-		function(data) {
-
-			// alert(data);
-			var obj = JSON.parse(data);
-			$.each(obj, function(i, item){
-				$('#tblsustitucion').append(
-					'<tr>'+
-					'<td>'+item.num_sust+'</td>'+
-					'<td>'+item.emp_matr_id+'</td>'+
-					'<td>'+item.month+'</td>'+
-					'<td>'+item.year+'</td>'+
-					'</tr>'
-					);
-
-			});
-			
-		});
-	});
- 	</script>
-	// $('#tblsustitucion').DataTable({
-	// 	'paging':true,
-	// 	'info':false,
-	// 	'filter':true 
-
-	// });
+<script>
+$(document).ready(function(){
+   $("#search").keyup(function(){
+       var str=  $("#search").val();
+       if(str == "") {
+               $( "#txtHint" ).html("<b>Después de hacer una búsqueda tu información será mostrada aquí...</b>"); 
+       }else {
+               $.get( "<?php echo site_url();?>/sustitucion/control?emp_matr_id="+str, function( data ){
+                   $( "#txtHint" ).html( data );  
+            });
+       }
+   });  
+});  
 </script>
