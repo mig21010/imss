@@ -49,11 +49,13 @@ class Justificacion extends CI_Controller {
 		$this->form_validation->set_rules('emp_matr_id', 'Matricula', 'trim|required|numeric');
 		$this->form_validation->set_rules('jus_fech', 'Horario', 'trim|required');
 		$this->form_validation->set_rules('jus_moti', 'Asunto', 'trim|required');
-		if ($this->form_validation->run() == TRUE OR FALSE) {
+		$this->form_validation->set_rules('jus_omi', 'Omision', 'trim|required');
+		if ($this->form_validation->run() == TRUE) {
 			$values = [
 				'emp_matr_id'=>$this->input->post('emp_matr_id', TRUE),
 				'jus_fech'=>$this->input->post('jus_fech', TRUE),
 				'jus_moti'=>$this->input->post('jus_moti', TRUE),
+				'jus_omi'=>$this->input->post('jus_omi', TRUE),
 				'jus_est' => 0
 			];
 			if ($this->mjustificacion->insert($values)) {

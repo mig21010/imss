@@ -22,6 +22,7 @@
 					<table class="table table-responsive">
 						<thead>
 							<th>Fecha de Justificacion</th>
+							<th>Omisión</th>
 							<th>Motivo</th>
 							<th>Estatus</th>
 							<th>Eliminar</th>
@@ -32,6 +33,17 @@
 							<?php foreach ($justificaciones as $value): ?>
 							<tr>
 								<th><?= $value->jus_fech ?></th>
+								<?php
+								switch ($value->jus_omi) {
+									case 0:
+										$opc = 'Entrada';
+										break;
+									case 1:
+										$opc = 'Salida';
+										break;
+									}
+								?>
+								<th><?= $opc ?></th>
 								<th><?= $value->jus_moti ?></th>
 								<?php $status = ($value->jus_est == 1) ? 'Aprobada' : 'No aprobada'; ?>
 								<th><?= $status ?></th>
