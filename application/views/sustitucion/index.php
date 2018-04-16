@@ -12,9 +12,11 @@
 						<div class="col-10">
 							<h1 class="text-center">Formatos de Sustituciones</h1>
 						</div>
+						<?php if($this->session->has_userdata('admin')):?>
 						<div class="col-4 text-right">
 							<button class="btn bg-success btn-lg text-white" onclick="control()">Control</button>
 						</div>
+						<?php endif ?>
 						<div class="col-4 text-right">
 							<button class="btn bg-success btn-lg text-white" onclick="crearFormato()">Crear</button>
 						</div>
