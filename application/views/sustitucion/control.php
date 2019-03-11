@@ -18,33 +18,6 @@
 				<div class="card-body">
 				<div class="row">
 				
-<<<<<<< HEAD
-					<table id="tblsustitucion" class="table table-responsive">
-						<thead>
-							<th>Número de Sustituciones</th>
-							<th>Matrícula</th>
-							<th>Nombre</th>
-							<th>Apellido Paterno</th>
-							<th>Apellido Materno</th>
-							<th>Mes de sustitución</th>
-							<th>Año de sustitución</th>
-						</thead>
-						<tbody>
-						<?php foreach($query as $value): ?>
-						<tr>
-							<td><?= $value->num_sust ?></td>
-							<td><?= $value->emp_matr_id ?></td>
-							<td><?= $value->emp_nom?></td>
-							<td><?= $value->emp_ape_pat?></td>
-							<td><?= $value->emp_ape_mat?></td>
-							<td><?= $value->month?></td>
-							<td><?= $value->year?></td>
-						</tr>
-							
-						<?php endforeach ?>
-						</tbody>
-					</table>
-=======
 		
 				<!-- <span class="input-group-addon" >SEARCH</span>  -->
   				<input autocomplete="off" id="search"  type="text" class="form-control input-sm" placeholder="Realiza tu búsqueda por Matrícula o Nombre del empleado" >
@@ -53,7 +26,6 @@
 			   
 				</div>
 
->>>>>>> test_searchlive
 				</div>
 
 			</div>

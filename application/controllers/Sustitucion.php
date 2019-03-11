@@ -26,15 +26,9 @@ class Sustitucion extends CI_Controller {
 		}else{
 			redirect(site_url(),'refresh');
 		}
-<<<<<<< HEAD
-		
-		$this->utilidades->layouts('sustitucion/index', $data);
-		
-=======
 		$data['count'] = $this->msustitucion->get_monthly_sust(); 
 		 // var_dump($data);
 		$this->utilidades->layouts('sustitucion/index', $data);		
->>>>>>> test_searchlive
 	}
 
 	public function crear()
